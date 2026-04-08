@@ -1,24 +1,26 @@
 ---
-
-title: MLOps-SRE-Env
+title: MLOps SRE Env
 emoji: 📟
-colorFrom: blue
-colorTo: green
+colorFrom: green
+colorTo: blue
 sdk: docker
-app_file: server/app.py
 pinned: false
--------------
+tags:
+  - openenv
+---
 
-# MLOps SRE Environment
+# MLOps-SRE-Env
 
-This project simulates an MLOps SRE incident response system with:
+A real-world OpenEnv simulator where an AI agent acts as a Site Reliability Engineer (SRE) to diagnose and resolve AI model endpoint failures.
 
-* FastAPI backend (environment simulation)
-* Gradio UI (human interaction)
-* AI agent (baseline automation)
+## Motivation (Real-World Utility)
+As AI engineers deploy more models to production, the bottleneck is infrastructure maintenance. This environment evaluates if frontier LLMs can safely navigate Kubernetes-style logic, query logs, and resolve incidents (like CUDA OOMs or bad configs) without taking destructive actions.
 
-## Run locally
+## Tasks & Progression
+1. **Easy:** High Latency (Action: Check metrics, scale GPUs).
+2. **Medium:** Bad Config (Action: Read logs, rollback deployment).
+3. **Hard:** The CUDA Trap (Action: Isolate the single crashed pod from the logs and surgically restart it. Standard LLMs will fail by restarting the whole cluster).
 
-```bash
-uvicorn server.app:app --host 0.0.0.0 --port 7860 --reload
-```
+## Setup
+1. Build and run the server locally: `docker build -t mlops-env -f server/Dockerfile . && docker run -p 7860:7860 mlops-env`
+2. Run baseline: `export OPENAI_API_KEY="your-key" && python baseline.py`

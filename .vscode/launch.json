@@ -1,0 +1,33 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "1. Start MLOps Server",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "server.app:app",
+                "--host",
+                "0.0.0.0",
+                "--port",
+                "7860",
+                "--reload"
+            ],
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            }
+        },
+        {
+            "name": "2. Run Baseline Agent",
+            "type": "python",
+            "request": "launch",
+            "program": "baseline.py",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            },
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

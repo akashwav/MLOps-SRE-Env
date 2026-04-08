@@ -1,0 +1,6 @@
+openenv-core
+pydantic
+fastapi
+uvicorn
+requests
+openai

@@ -1,0 +1,22 @@
+name: MLOps-SRE-Env
+version: "1.0.0"
+description: "A real-world Site Reliability Engineering (SRE) simulator where an agent must diagnose and resolve AI model endpoint failures."
+tags: ["sre", "mlops", "kubernetes", "incident-response"]
+
+entrypoint: "client:MLOpsClient" 
+
+tasks:
+  - id: task-1-easy-latency
+    name: "High Traffic Latency"
+    difficulty: "easy"
+    description: "Diagnose a P99 latency spike and scale up GPU replicas to handle traffic."
+  
+  - id: task-2-medium-config
+    name: "Bad Configuration Rollback"
+    difficulty: "medium"
+    description: "Investigate a 502 Bad Gateway error, find bad syntax in logs, and rollback."
+  
+  - id: task-3-hard-oom
+    name: "The CUDA OOM Trap"
+    difficulty: "hard"
+    description: "Identify and isolate a single crashed pod experiencing a CUDA OOM without resetting the healthy cluster."

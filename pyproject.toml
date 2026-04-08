@@ -20,3 +20,6 @@ dependencies = [
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["server*", "models.py", "client.py", "env.py"]
+
+[project.scripts]
+mlops-server = "server.app:main"

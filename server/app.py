@@ -2,6 +2,7 @@ from typing import Optional
 from fastapi import FastAPI
 from pydantic import BaseModel
 import gradio as gr
+import uvicorn
 from models import SREObservation, SREAction, SREState
 from server.environment import MLOpsEnvironment
 
@@ -75,3 +76,10 @@ with gr.Blocks(theme=gr.themes.Monochrome()) as dashboard:
 
 # Mount Gradio onto the FastAPI app
 app = gr.mount_gradio_app(app, dashboard, path="/")
+
+def main():
+    """Entry point for the server script required by OpenEnv."""
+    uvicorn.run("server.app:app", host="0.0.0.0", port=7860, reload=False)
+
+if __name__ == "__main__":
+    main()

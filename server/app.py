@@ -1,3 +1,4 @@
+from typing import Optional
 from fastapi import FastAPI
 from pydantic import BaseModel
 import gradio as gr
@@ -9,11 +10,13 @@ env = MLOpsEnvironment()
 
 # --- 1. The OpenEnv API Routes (For the Auto-Grader) ---
 class ResetRequest(BaseModel):
-    task_id: str
+    task_id: Optional[str] = "task-1-easy-latency"
 
 @app.post("/reset", response_model=SREObservation)
-async def reset(req: ResetRequest):
-    return env.reset(req.task_id)
+async def reset(req: Optional[ResetRequest] = None):
+    # If the auto-grader sends an empty request (null), safely default to task 1
+    task = req.task_id if req and req.task_id else "task-1-easy-latency"
+    return env.reset(task)
 
 @app.post("/step")
 async def step(action: SREAction):
